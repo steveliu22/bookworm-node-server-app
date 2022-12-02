@@ -22,7 +22,7 @@ const UsersController = (app) => {
       return;
     }
     const existingUser = await userDao.findUserByUsername(user.username);
-    if (existingUser) {
+    if (existingUser && existingUser.length !== 0) {
       res.sendStatus(403);
       return;
     }
@@ -33,13 +33,13 @@ const UsersController = (app) => {
 
   const login = async (req, res) => {
     const credentials = req.body;
-    const existingUser = await userDao.findUserByCredentials(
+    const existingUsers = await userDao.findUserByCredentials(
       credentials.username,
       credentials.password
     );
-    if (existingUser) {
-      req.session.currentUser = existingUser;
-      res.json(existingUser);
+    if (existingUsers && existingUsers.length !== 0) {
+      req.session.currentUser = existingUsers[0];
+      res.json(existingUsers[0]);
     } else {
       res.sendStatus(403);
     }

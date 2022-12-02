@@ -17,6 +17,7 @@ const options = {
   socketTimeoutMS: 45000,
   family: 4,
 };
+
 mongoose.connect(CONNECTION_STRING, options);
 const app = express();
 const currSession = {
@@ -30,7 +31,12 @@ if (process.env.ENV === 'production') {
   currSession.cookie.secure = true;
 }
 
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    origin: 'http://localhost:3000',
+  })
+);
 app.use(session(currSession));
 app.use(express.json());
 UsersController(app);
