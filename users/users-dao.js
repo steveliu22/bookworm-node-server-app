@@ -10,5 +10,8 @@ export const findUserByCredentials = async (username, password) =>
 
 export const findAllUsers = async () => await userModel.find();
 
-export const deleteUser = async (uid, userUpdates) =>
+export const deleteUser = async (uid) =>
+  await userModel.deleteOne({ _id: uid });
+
+export const updateUser = async (uid, userUpdates) =>
   await userModel.updateOne({ _id: uid }, { $set: userUpdates });

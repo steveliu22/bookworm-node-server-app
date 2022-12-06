@@ -11,9 +11,18 @@ const UsersController = (app) => {
     res.json(actualUser);
   };
 
-  const updateUser = () => {};
+  const updateUser = async (req, res) => {
+    const uid = req.params.uid;
+    const userUpdates = req.body;
+    const status = await userDao.updateUser(uid, userUpdates);
+    res.send(status);
+  };
 
-  const deleteUser = () => {};
+  const deleteUser = async (req, res) => {
+    const uid = req.params.uid;
+    const status = userDao.deleteUser(uid);
+    res.send(status);
+  };
 
   const register = async (req, res) => {
     const user = req.body;
@@ -45,12 +54,12 @@ const UsersController = (app) => {
     }
   };
 
-  const logout = (req, res) => {
+  const logout = async (req, res) => {
     req.session.currentUser = null;
     res.sendStatus(200);
   };
 
-  const profile = (req, res) => {
+  const profile = async (req, res) => {
     if (req.session.currentUser) {
       res.send(req.session.currentUser);
     } else {

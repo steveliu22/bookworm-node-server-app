@@ -18,6 +18,7 @@
     "no-return-await": 0,
     "prettier/prettier": ["error", { "singleQuote": true }],
     "prefer-destructuring": 0,
-    "import/extensions": 0
+    "import/extensions": 0,
+    "no-underscore-dangle": 0
   }
 }
