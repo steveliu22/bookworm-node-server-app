@@ -36,7 +36,7 @@ if (process.env.ENV === 'production') {
 app.use('/images', express.static('images'));
 
 const origin = process.env.LIVE || 'http://localhost:3000';
-console.log(origin);
+
 app.use(
   cors({
     credentials: true,
