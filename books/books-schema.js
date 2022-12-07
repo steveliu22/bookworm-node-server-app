@@ -11,4 +11,6 @@ const booksSchema = mongoose.Schema(
   { collection: 'books' }
 );
 
+booksSchema.index({ '$**': 'text' });
+
 export default booksSchema;

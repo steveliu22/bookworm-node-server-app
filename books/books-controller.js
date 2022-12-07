@@ -24,7 +24,14 @@ const BooksController = (app) => {
     res.send(status);
   };
 
+  const findBookByID = async (req, res) => {
+    const bid = req.params.bid;
+    const book = await booksDao.findBookByID(bid);
+    res.json(book);
+  };
+
   app.get('/books', findAllBooks);
+  app.get('/books/:bid', findBookByID);
   app.post('/books', createBook);
   app.put('/books/:bid', updateBook);
   app.delete('/books/:bid', deleteBook);
