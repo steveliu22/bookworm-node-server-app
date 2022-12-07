@@ -9,9 +9,7 @@ import ReviewsController from './reviews/reviews-controller.js';
 import ImagesController from './image-api/images-controller.js';
 import CurrentlyReadingController from './currently-reading/currently-reading-controller.js';
 
-const CONNECTION_STRING =
-  process.env.BOOKWORM_DB_CONNECTION_STRING ||
-  'mongodb://localhost:27017/bookworm';
+const CONNECTION_STRING = process.env.BOOKWORM_DB_CONNECTION_STRING;
 
 const options = {
   useNewUrlParser: true,
@@ -37,12 +35,15 @@ if (process.env.ENV === 'production') {
 
 app.use('/images', express.static('images'));
 
+const origin = process.env.LIVE || 'http://localhost:3000';
+console.log(origin);
 app.use(
   cors({
     credentials: true,
-    origin: 'http://localhost:3000',
+    origin,
   })
 );
+
 app.use(session(currSession));
 app.use(express.json());
 UsersController(app);
