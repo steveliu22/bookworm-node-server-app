@@ -26,15 +26,11 @@ const currSession = {
   secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
-  name: 'bookworm',
   cookie: {
-    secure: !!process.env.NODE_ENV,
+    secure: false,
     httpOnly: false,
-    sameSite: 'none',
   },
 };
-
-app.use('/images', express.static('images'));
 
 const origin = process.env.LIVE || 'http://localhost:3000';
 
@@ -44,9 +40,9 @@ app.use(
     origin,
   })
 );
-
 app.use(session(currSession));
 app.use(express.json());
+app.use('/images', express.static('images'));
 UsersController(app);
 SessionController(app);
 BooksController(app);
