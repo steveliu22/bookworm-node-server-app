@@ -30,8 +30,22 @@ const BooksController = (app) => {
     res.json(book);
   };
 
+  const findBooksByAuthor = async (req, res) => {
+    const author = req.params.uid;
+    const books = await booksDao.findBooksByAuthor(author);
+    res.json(books);
+  };
+
+  const findBooksBySearch = async (req, res) => {
+    const search = req.params.search;
+    const books = await booksDao.findBooksBySearch(search);
+    res.json(books);
+  };
+
   app.get('/books', findAllBooks);
   app.get('/books/:bid', findBookByID);
+  app.get('/books/search/:search', findBooksBySearch);
+  app.get('/users/books/:uid', findBooksByAuthor);
   app.post('/books', createBook);
   app.put('/books/:bid', updateBook);
   app.delete('/books/:bid', deleteBook);

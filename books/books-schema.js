@@ -3,14 +3,19 @@ import mongoose from 'mongoose';
 const booksSchema = mongoose.Schema(
   {
     title: { type: String, required: true },
-    authors: [{ type: String }],
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'users',
+      required: true,
+    },
     description: { type: String },
     coverImage: { type: String },
     isbn: { type: String },
+    publisher: { type: String },
+    categories: [{ type: String }],
+    publishDate: { type: String },
   },
   { collection: 'books' }
 );
-
-booksSchema.index({ '$**': 'text' });
 
 export default booksSchema;
