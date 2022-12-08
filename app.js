@@ -28,17 +28,11 @@ const currSession = {
   saveUninitialized: true,
   name: 'bookworm',
   cookie: {
-    secure: false, // required for cookies to work on HTTPS
+    secure: !!process.env.NODE_ENV,
     httpOnly: false,
     sameSite: 'none',
   },
 };
-
-if (process.env.ENV === 'production') {
-  currSession.cookie.secure = true;
-}
-
-console.log(currSession.cookie.secure);
 
 app.use('/images', express.static('images'));
 
