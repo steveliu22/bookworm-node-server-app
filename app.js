@@ -26,12 +26,19 @@ const currSession = {
   secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false },
+  name: 'bookworm',
+  cookie: {
+    secure: false, // required for cookies to work on HTTPS
+    httpOnly: false,
+    sameSite: 'none',
+  },
 };
 
 if (process.env.ENV === 'production') {
   currSession.cookie.secure = true;
 }
+
+console.log(currSession.cookie.secure);
 
 app.use('/images', express.static('images'));
 
