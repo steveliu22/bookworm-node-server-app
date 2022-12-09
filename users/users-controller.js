@@ -67,7 +67,14 @@ const UsersController = (app) => {
     }
   };
 
+  const findUserById = async (req, res) => {
+    const id = req.params.uid;
+    const user = await userDao.findUserById(id);
+    res.json(user);
+  };
+
   app.get('/users', findAllUsers);
+  app.get('/users/:uid', findUserById);
   app.post('/users', createUser);
   app.put('/users/:uid', updateUser);
   app.delete('/users/:uid', deleteUser);
