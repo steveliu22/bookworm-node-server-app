@@ -20,7 +20,7 @@ const BooksController = (app) => {
 
   const deleteBook = async (req, res) => {
     const bid = req.params.bid;
-    const status = booksDao.deleteBook(bid);
+    const status = await booksDao.deleteBook(bid);
     res.send(status);
   };
 

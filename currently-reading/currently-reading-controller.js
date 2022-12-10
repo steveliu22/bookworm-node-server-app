@@ -19,8 +19,15 @@ const CurrentlyReadingController = (app) => {
     res.json(currentlyReadingBooks);
   };
 
+  const deleteCurrentlyReading = async (req, res) => {
+    const crid = req.params.crid;
+    const status = await currentlyReadingDao.deleteCurrentlyReading(crid);
+    res.json(status);
+  };
+
   app.post('/currentlyReading', createCurrentlyReading);
   app.get('/users/:user/currentlyReading', findUserCurrentlyReading);
+  app.delete('/currentlyReading/:crid', deleteCurrentlyReading);
 };
 
 export default CurrentlyReadingController;

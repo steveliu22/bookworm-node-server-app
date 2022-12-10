@@ -5,3 +5,6 @@ export const createCurrentlyReading = (currentlyReading) =>
 
 export const findUserCurrentlyReading = (user) =>
   currentlyReadingModel.find({ user }).populate('user').exec();
+
+export const deleteCurrentlyReading = (crid) =>
+  currentlyReadingModel.deleteOne({ _id: crid });

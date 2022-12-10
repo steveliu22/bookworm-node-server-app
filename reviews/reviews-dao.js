@@ -9,3 +9,5 @@ export const findReviewsByBook = (bid) =>
 
 export const findReviewsByAuthor = (user) =>
   reviewsModel.find({ user }).populate('user').exec();
+
+export const deleteReview = (rid) => reviewsModel.deleteOne({ _id: rid });

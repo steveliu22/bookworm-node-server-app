@@ -22,9 +22,16 @@ const ReviewsController = (app) => {
     res.json(reviews);
   };
 
+  const deleteReview = async (req, res) => {
+    const rid = req.params.rid;
+    const status = await reviewsDao.deleteReview(rid);
+    res.json(status);
+  };
+
   app.post('/reviews', createReview);
   app.get('/books/:bid/reviews', findReviewsByBook);
   app.get('/users/:author/reviews', findReviewsByAuthor);
+  app.delete('/reviews/:rid', deleteReview);
 };
 
 export default ReviewsController;
