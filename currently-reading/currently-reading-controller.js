@@ -19,6 +19,13 @@ const CurrentlyReadingController = (app) => {
     res.json(currentlyReadingBooks);
   };
 
+  const findAllUsersCurrentlyReading = async (req, res) => {
+    const bookID = req.params.bid;
+    const allUsersCurrentlyReading =
+      await currentlyReadingDao.findAllUsersCurrentlyReading(bookID);
+    res.json(allUsersCurrentlyReading);
+  };
+
   const deleteCurrentlyReading = async (req, res) => {
     const crid = req.params.crid;
     const status = await currentlyReadingDao.deleteCurrentlyReading(crid);
@@ -27,6 +34,7 @@ const CurrentlyReadingController = (app) => {
 
   app.post('/currentlyReading', createCurrentlyReading);
   app.get('/users/:user/currentlyReading', findUserCurrentlyReading);
+  app.get('/currentlyReading/:bid/users', findAllUsersCurrentlyReading);
   app.delete('/currentlyReading/:crid', deleteCurrentlyReading);
 };
 
