@@ -8,6 +8,7 @@ import BooksController from './books/books-controller.js';
 import ReviewsController from './reviews/reviews-controller.js';
 import ImagesController from './image-api/images-controller.js';
 import CurrentlyReadingController from './currently-reading/currently-reading-controller.js';
+import MeetingsController from './meeting/meetings-controller.js';
 
 const CONNECTION_STRING = process.env.BOOKWORM_DB_CONNECTION_STRING;
 
@@ -50,4 +51,5 @@ BooksController(app);
 ReviewsController(app);
 ImagesController(app);
 CurrentlyReadingController(app);
+MeetingsController(app);
 app.listen(process.env.PORT || 4000);
